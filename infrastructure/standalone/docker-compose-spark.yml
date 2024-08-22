@@ -1,0 +1,15 @@
+version: '3'
+services:
+  spark:
+    image: jupyter/pyspark-notebook
+    container_name: spark-notebook
+    ports:
+      - 8888:8888
+    environment:
+      - INIT_DAEMON_STEP=setup_spark 
+    networks:
+      - standalone_kafka_net
+
+networks:
+  standalone_kafka_net:
+    external: true

@@ -8,9 +8,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     networks:
       - kafka_net
-
   kafka:
-    
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
@@ -37,6 +35,9 @@ services:
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
     networks:
       - kafka_net
+    depends_on:
+      - kafka
+      - zookeeper
 
 networks:
   kafka_net:

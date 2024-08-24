@@ -4,6 +4,7 @@
 Spark latest version for Hadoop with OpenJDK 8 and Scala 2.12
 
 ### Spark Standalone mode
+![Simple visualization Spark and Kafka](assets/img/2024-08-24-10-12-26.png)
 ![Spark master and Worker architecture](assets/img/2023-03-12-00-01-13.png)
 #### Spark Jupyter notebook
 ```bash

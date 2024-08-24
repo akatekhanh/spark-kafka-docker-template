@@ -5,7 +5,7 @@
 
 **Command to run:**
 ```bash
-python3 1_kafka_producer_comsumer/producer.py
+python3 src/1_kafka_producer_comsumer/producer.py
 ```
 
 > Comsume meaning that we get or pul data from Kafka cluster specified by Kafka topic
@@ -13,5 +13,5 @@ python3 1_kafka_producer_comsumer/producer.py
 
 **Commadn to run consumer**
 ```bash
-python3 1_kafka_producer_comsumer/consumer.py
+python3 src/1_kafka_producer_comsumer/consumer.py
 ```

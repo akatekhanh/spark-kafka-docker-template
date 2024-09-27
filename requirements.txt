@@ -1,1 +1,4 @@
+# We use these libraries for python 3.11
 kafka-python
+pyspark==3.5.3
+dbldatagen==0.4.0

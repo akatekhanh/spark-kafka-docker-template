@@ -133,3 +133,5 @@ dmypy.json
 **.ipython
 **checkpoint
 *.ivy2
+**.jar
+**.bash_history

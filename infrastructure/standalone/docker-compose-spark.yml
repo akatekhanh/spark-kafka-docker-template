@@ -9,6 +9,7 @@ services:
       - INIT_DAEMON_STEP=setup_spark 
     volumes:
     - ../../src:/home/jovyan
+    - ../../project:/home/jovyan/project
     networks:
       - standalone_kafka_net
 

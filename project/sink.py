@@ -16,6 +16,12 @@ class Sink:
     )
     
     def write(self):
+        raise NotImplementedError
+
+
+
+class KafkaSink(Sink):
+    def write(self):
         (
             self._df
             .selectExpr("CAST(transaction_id AS STRING)", "to_json(struct(*)) AS value")
@@ -23,6 +29,16 @@ class Sink:
             .format(self._type)
             .options(**self._conf.as_dict())
             .save()
+        )
+
+    def write_stream(self):
+        return (
+            self._df
+            .selectExpr("CAST(transaction_id AS STRING)", "to_json(struct(*)) AS value")
+            .writeStream
+            .format(self._type)
+            .options(**self._conf.as_dict())
+            .start()
         )
 
 

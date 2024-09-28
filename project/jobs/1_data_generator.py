@@ -1,7 +1,7 @@
 from attr import define
 from project.conf import KafkaSinkConf
 from project.models.transaction_log import TransactionLog
-from project.sink import Sink
+from project.sink import Sink, KafkaSink
 from project.utils import get_spark_session
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 import dbldatagen as dg
@@ -29,17 +29,20 @@ if __name__ == "__main__":
         .withColumn("status", "string", values=["Completed", "Pending", "Cancelled"], random=True)
     )
 
-    df_flight_data = transaction_log.build()
+    df_flight_data = transaction_log.build(
+        withStreaming=True, options={'rowsPerSecond': 1}
+    )
     kafka_conf = KafkaSinkConf(
             bootstrap_servers="kafka:9092",
-            topic="test"
+            topic="test",
+            checkpoint_location="./checkpoint"
         )
-    sink = Sink(
+    sink = KafkaSink(
         df=df_flight_data,
         type="kafka",
         ctx=None,
         conf=kafka_conf
     )
-    sink.write()
-    
-    df_flight_data.show(10)
+    df = sink.write_stream()
+    spark.streams.awaitAnyTermination()
+

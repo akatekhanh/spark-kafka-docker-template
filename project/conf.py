@@ -11,12 +11,17 @@ class BaseConf:
 class KafkaSinkConf(BaseConf):
     bootstrap_servers: str = field()
     topic: str = field()
+    checkpoint_location: str = field()
     
     def as_dict(self):
-        return {
+        conf = dict()
+        conf.update({
             "kafka.bootstrap.servers": self.bootstrap_servers,
             "topic": self.topic
-        }
+        })
+        if self.checkpoint_location:
+            conf.update({"checkpointLocation": self.checkpoint_location})
+        return conf
 
 @define
 class IcebergSinkConf(BaseConf):

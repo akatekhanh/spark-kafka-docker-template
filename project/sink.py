@@ -24,3 +24,12 @@ class Sink:
             .options(**self._conf.as_dict())
             .save()
         )
+
+
+class IcebergSink(Sink):
+    def write(self):
+        (
+            self._df.writeTo(
+                self._conf.table
+            ).append()
+        )

@@ -23,3 +23,12 @@ class Source:
             .options(**self._conf.as_dict())
             .load()
         )
+
+    def read(self, spark: SparkSession) -> DataFrame:
+        return (
+            spark
+            .read
+            .format(self._type)
+            .options(**self._conf.as_dict())
+            .load()
+        )

@@ -10,6 +10,7 @@ services:
     volumes:
     - ../../src:/home/jovyan
     - ../../project:/home/jovyan/project
+    - ../../data:/data
     networks:
       - standalone_kafka_net
 

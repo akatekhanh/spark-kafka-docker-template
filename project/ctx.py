@@ -5,7 +5,6 @@ from attrs import define, field
 class BaseCtx:
     logger: any = field()
     base_conf: dict = field()
-    conf
 
 
 @define

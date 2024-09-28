@@ -1,48 +1,10 @@
 from attr import define
 from project.conf import KafkaSinkConf
+from project.models.transaction_log import TransactionLog
 from project.sink import Sink
 from project.utils import get_spark_session
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 import dbldatagen as dg
-from faker import Faker
-
-@define
-class TransactionLog:    
-    faker = Faker()
-    # Define the schema for the first table
-    transaction_log = StructType([
-        StructField("transaction_id", IntegerType(), True),
-        StructField("customer_id", IntegerType(), True),
-        StructField("product_id", StringType(), True),
-        StructField("quantity", IntegerType(), True),
-        StructField("price", FloatType(), True),
-        StructField("total_amount", FloatType(), True),
-        StructField("transaction_date", StringType(), True),
-        StructField("payment_method", StringType(), True),
-        StructField("shipping_address", StringType(), True),
-        StructField("billing_address", StringType(), True),
-        StructField("status", StringType(), True)
-    ])
-    
-    @property
-    def shipping_address(self):
-        return [self.faker.address() for _ in range(100)]
-
-@define
-class Customer:
-    customer = StructType([
-        StructField("customer_id", IntegerType(), True),
-        StructField("first_name", StringType(), True),
-        StructField("last_name", StringType(), True),
-        StructField("email", StringType(), True),
-        StructField("phone_number", StringType(), True),
-        StructField("address", StringType(), True),
-        StructField("city", StringType(), True),
-        StructField("state", StringType(), True),
-        StructField("zip_code", StringType(), True),
-        StructField("country", StringType(), True),
-        StructField("registration_date", StringType(), True)
-    ])
 
 
 if __name__ == "__main__":

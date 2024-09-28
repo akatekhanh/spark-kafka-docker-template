@@ -1,4 +1,6 @@
 # Spark and Kafka in Docker template for testing and learning
+## Simple Lakehouse architecture and ETL demo
+
 ## Spark
 **Spark version:**
 Spark latest version for Hadoop with OpenJDK 8 and Scala 2.12

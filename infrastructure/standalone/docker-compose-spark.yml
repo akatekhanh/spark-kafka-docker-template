@@ -6,11 +6,15 @@ services:
     ports:
       - 8888:8888
     environment:
-      - INIT_DAEMON_STEP=setup_spark 
+      - INIT_DAEMON_STEP=setup_spark
+      - PYTHONPATH=${PYTHONPATH}:/home/jovyan
     volumes:
     - ../../src:/home/jovyan
     - ../../project:/home/jovyan/project
+    - ../../assets/jars:/home/jovyan/jars
     - ../../data:/data
+    working_dir:
+      /home/jovyan
     networks:
       - standalone_kafka_net
 

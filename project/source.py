@@ -2,6 +2,8 @@ from typing import Optional
 from attrs import define, field, validators
 from pyspark.sql import DataFrame, SparkSession
 
+from project.conf import KafkaSourceConf, IcebergSourceConf
+
 
 @define
 class Source:

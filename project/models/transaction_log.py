@@ -3,9 +3,10 @@ from attrs import define, field, validators
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 from faker import Faker
 
+from .base import Base
 
 @define
-class TransactionLog:
+class TransactionLog(Base):
     faker = Faker()
     # Define the schema for the first table
 
@@ -28,3 +29,7 @@ class TransactionLog:
     @property
     def shipping_address(self):
         return [self.faker.address() for _ in range(100)]
+
+    @staticmethod
+    def table():
+        return "transaction_log"

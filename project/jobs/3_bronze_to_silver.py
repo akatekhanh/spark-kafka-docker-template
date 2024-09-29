@@ -17,7 +17,7 @@ if __name__ == '__main__':
         ctx=None,
         conf=IcebergSourceConf(
             catalog_name="optimus",
-            schema_name="raw",
+            schema_name="bronze",
             table_name="transaction_log"
         )
     ).read(spark)
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             schema_name="silver",
             table_name="transaction_log",
             trigger="5 seconds",
-            checkpoint_location="./checkpoint/silver"
+            checkpoint_location="./checkpoint/silver/transaction_log"
         )
     )
     sink.write()

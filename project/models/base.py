@@ -11,3 +11,11 @@ class Base:
             StructField("tf_etl_timestamp", TimestampType()),
             StructField("tf_partition_date", StringType())
         ])
+
+    @staticmethod
+    def get_table(**kwargs):
+        return f"`{kwargs.get('catalog_name')}`.`{kwargs.get('schema_name')}`.`{kwargs.get('table_name')}`"
+
+    @staticmethod
+    def table():
+        raise NotImplementedError

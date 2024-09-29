@@ -1,3 +1,4 @@
+from project.models.transaction_log import TransactionLog
 from project.utils import get_spark_session
 
 raw_tbl = """
@@ -17,9 +18,21 @@ if __name__ == '__main__':
         'catalog_name': 'optimus'
     })
 
-    # Create raw table on Iceberg
+    # Create bronze transaction_log table on Iceberg
     spark.sql(raw_tbl.format(
         catalog_name="optimus",
-        schema_name="raw",
+        schema_name="bronze",
         table_name="transaction_log"
     )).show()
+
+    # Create `transaction_log` table in `Silver` zone
+    (
+        spark
+        .createDataFrame([], TransactionLog.spark_schema())
+        .writeTo(TransactionLog.get_table(**{
+            "catalog_name": "optimus",
+            "schema_name": "silver",
+            "table_name": "transaction_log"
+        }))
+        .create()
+    )

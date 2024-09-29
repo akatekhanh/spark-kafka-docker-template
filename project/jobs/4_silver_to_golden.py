@@ -1,7 +1,7 @@
 from pyspark.sql import DataFrame
 import pyspark.sql.functions as f
 
-from project.conf import IcebergSourceConf, KafkaSinkConf, KafkaSourceConf, IcebergSinkConf
+from project.conf import KafkaSinkConf, KafkaSourceConf, IcebergSinkConf
 from project.models.transaction_log import TransactionLog
 from project.sink import Sink, IcebergSink
 from project.source import Source
@@ -13,12 +13,11 @@ if __name__ == '__main__':
     })
 
     source: DataFrame = Source(
-        type='iceberg',
+        type='kafka',
         ctx=None,
-        conf=IcebergSourceConf(
-            catalog_name="optimus",
-            schema_name="raw",
-            table_name="transaction_log"
+        conf=KafkaSourceConf(
+            bootstrap_servers="kafka:9092",
+            subscribe="test"
         )
     ).read(spark)
 
@@ -37,10 +36,8 @@ if __name__ == '__main__':
         ctx=None,
         conf=IcebergSinkConf(
             catalog_name="optimus",
-            schema_name="silver",
-            table_name="transaction_log",
-            trigger="5 seconds",
-            checkpoint_location="./checkpoint/silver"
+            schema_name="raw",
+            table_name="transaction_log"
         )
     )
     sink.write()

@@ -30,11 +30,18 @@ class IcebergSinkConf(BaseConf):
     schema_name: str = field()
     table_name: str = field()
     trigger: str = field()
+    checkpoint_location: str = field()
 
     @property
     def table(self):
         return f"`{self.catalog_name}`.`{self.schema_name}`.`{self.table_name}`"
-
+    
+    def as_dict(self):
+        conf = dict()
+        if self.checkpoint_location:
+            conf.update({"checkpointLocation": self.checkpoint_location})
+        return conf
+    
 # Define Source configuration
 @define
 class KafkaSourceConf(BaseConf):
@@ -62,4 +69,7 @@ class IcebergSourceConf(BaseConf):
     table_name: str = field()
     warehouse_location: str = field()
     catalog_type: str = field()
-    
+
+    @property
+    def table(self):
+        return f"`{self.catalog_name}`.`{self.schema_name}`.`{self.table_name}`"

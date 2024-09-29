@@ -17,7 +17,8 @@ if __name__ == '__main__':
         ctx=None,
         conf=KafkaSourceConf(
             bootstrap_servers="kafka:9092",
-            subscribe="test"
+            subscribe="test",
+            starting_offsets="earliest"
         )
     ).read_stream(spark)
 
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     df = (
         source
         .selectExpr(
-            'cast(value as string)',
+            'cast(value as string) as value',
             'current_timestamp() as tf_etl_timestamp',
             "date_format(current_date(), 'yyyy-MM-dd') as tf_partition_date"
         )
@@ -39,7 +40,10 @@ if __name__ == '__main__':
         conf=IcebergSinkConf(
             catalog_name="optimus",
             schema_name="raw",
-            table_name="transaction_log"
+            table_name="transaction_log",
+            trigger="5 seconds",
+            checkpoint_location="./checkpoint/landing_to_raw"
         )
     )
-    sink.write_stream()
+    df = sink.write_stream()
+    df.awaitTermination()

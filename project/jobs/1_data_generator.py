@@ -3,7 +3,7 @@ from project.conf import KafkaSinkConf
 from project.models.transaction_log import TransactionLog
 from project.sink import Sink, KafkaSink
 from project.utils import get_spark_session
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
+# from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType
 import dbldatagen as dg
 
 
@@ -30,8 +30,9 @@ if __name__ == "__main__":
     )
 
     df_flight_data = transaction_log.build(
-        withStreaming=True, options={'rowsPerSecond': 1}
+        withStreaming=True, options={'rowsPerSecond': 10}
     )
+
     kafka_conf = KafkaSinkConf(
             bootstrap_servers="kafka:9092",
             topic="test",
@@ -44,5 +45,6 @@ if __name__ == "__main__":
         conf=kafka_conf
     )
     df = sink.write_stream()
-    spark.streams.awaitAnyTermination()
+    df.awaitTermination()
 
+# spark-submit --packages org.apache.spark:spark-streaming-kafka-0-10_2.12:3.2.0,org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0 project/jobs/1_data_generator.py

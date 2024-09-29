@@ -1,4 +1,4 @@
-from attrs import define, field
+from attrs import define, field, validators
 from pyspark.conf import SparkConf
 
 
@@ -12,6 +12,7 @@ class KafkaSinkConf(BaseConf):
     bootstrap_servers: str = field()
     topic: str = field()
     checkpoint_location: str = field()
+    trigger: str = field()
     
     def as_dict(self):
         conf = dict()
@@ -28,6 +29,7 @@ class IcebergSinkConf(BaseConf):
     catalog_name: str = field()
     schema_name: str = field()
     table_name: str = field()
+    trigger: str = field()
 
     @property
     def table(self):

@@ -13,6 +13,7 @@ services:
     - ../../project:/home/jovyan/project
     - ../../assets/jars:/home/jovyan/jars
     - ../../data:/data
+    - ../../requirements.txt:/home/jovyan/requirements.txt
     working_dir:
       /home/jovyan
     networks:

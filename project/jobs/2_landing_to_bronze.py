@@ -19,7 +19,7 @@ if __name__ == '__main__':
             bootstrap_servers="kafka:9092",
             subscribe="test"
         )
-    ).read(spark)
+    ).read_stream(spark)
 
     # Transform
     df = (
@@ -42,4 +42,4 @@ if __name__ == '__main__':
             table_name="transaction_log"
         )
     )
-    sink.write()
+    sink.write_stream()

@@ -37,6 +37,7 @@ class KafkaSink(Sink):
             .selectExpr("CAST(transaction_id AS STRING)", "to_json(struct(*)) AS value")
             .writeStream
             .format(self._type)
+            .trigger(processingTime=self._conf.trigger)
             .options(**self._conf.as_dict())
             .start()
         )
@@ -48,4 +49,13 @@ class IcebergSink(Sink):
             self._df.writeTo(
                 self._conf.table
             ).append()
+        )
+    
+    def write_stream(self):
+        return (
+            self._df.writeStream
+            .format(self._type)
+            .trigger(processingTime=self._conf.trigger)
+            .options(**self._conf.as_dict())
+            .toTable(self._conf.table)
         )

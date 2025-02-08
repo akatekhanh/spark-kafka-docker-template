@@ -67,8 +67,8 @@ class IcebergSourceConf(BaseConf):
     catalog_name: str = field()
     schema_name: str = field()
     table_name: str = field()
-    warehouse_location: str = field()
-    catalog_type: str = field()
+    warehouse_location: str = field(default=None)
+    catalog_type: str = field(default=None)
 
     @property
     def table(self):

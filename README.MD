@@ -1,3 +1,12 @@
+- [Spark and Kafka in Docker template for testing and learning](#spark-and-kafka-in-docker-template-for-testing-and-learning)
+  - [Simple Lakehouse architecture and ETL demo](#simple-lakehouse-architecture-and-etl-demo)
+  - [Spark](#spark)
+    - [Spark Standalone mode](#spark-standalone-mode)
+      - [Spark Jupyter notebook](#spark-jupyter-notebook)
+  - [Kafka](#kafka)
+    - [\[Development\] Kakfa Standalone mode with 1 Zookeeper, 1 Kafka and Kafka UI](#development-kakfa-standalone-mode-with-1-zookeeper-1-kafka-and-kafka-ui)
+
+
 # Spark and Kafka in Docker template for testing and learning
 ## Simple Lakehouse architecture and ETL demo
 
@@ -17,7 +26,7 @@ docker-compose -f infrastructure/standalone/docker-compose-spark.yml up -d
 ![First Spark application](assets/img/2024-08-24-10-04-00.png)
 
 ## Kafka
-### Kakfa Standalone mode with 1 Zookeeper, 1 Kafka and Kafka UI
+### [Development] Kakfa Standalone mode with 1 Zookeeper, 1 Kafka and Kafka UI
 *How to run it*
 ```bash
 docker-compose -f infrastructure/standalone/docker-compose-kafka.yml up -d

@@ -4,7 +4,7 @@ import pyspark.sql.functions as f
 from project.conf import IcebergSourceConf, KafkaSinkConf, KafkaSourceConf, IcebergSinkConf
 from project.models.transaction_log import TransactionLog
 from project.sink import Sink, IcebergSink
-from project.source import Source
+from project.source import Source, IcebergSource
 from project.utils import get_spark_session
 
 if __name__ == '__main__':
@@ -12,7 +12,7 @@ if __name__ == '__main__':
         "catalog_name": "optimus"
     })
 
-    source: DataFrame = Source(
+    source: DataFrame = IcebergSource(
         type='iceberg',
         ctx=None,
         conf=IcebergSourceConf(
@@ -43,4 +43,5 @@ if __name__ == '__main__':
             checkpoint_location="./checkpoint/silver/transaction_log"
         )
     )
-    sink.write()
+    df = sink.write_stream()
+    df.awaitTermination()

@@ -7,7 +7,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     networks:
-      - kafka_net
+      - standalone_net
   kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
@@ -22,7 +22,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
-      - kafka_net
+      - standalone_net
   
   kafka-ui:
     image: provectuslabs/kafka-ui
@@ -34,11 +34,11 @@ services:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
     networks:
-      - kafka_net
+      - standalone_net
     depends_on:
       - kafka
       - zookeeper
 
 networks:
-  kafka_net:
-    driver: "bridge"
+  standalone_net:
+    external: true

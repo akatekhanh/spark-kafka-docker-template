@@ -14,8 +14,8 @@ services:
       MINIO_ROOT_PASSWORD: minioadmin
     command: server --console-address ":9001" /data
     networks:
-      - standalone_kafka_net
+      - standalone_net
 
 networks:
-  standalone_kafka_net:
+  standalone_net:
     external: true

@@ -1,15 +1,18 @@
+# Infrastructure
+<!-- - [Infrastructure](#infrastructure) -->
+- [Infrastructure](#infrastructure)
 - [Spark and Kafka in Docker template for testing and learning](#spark-and-kafka-in-docker-template-for-testing-and-learning)
-  - [Simple Lakehouse architecture and ETL demo](#simple-lakehouse-architecture-and-etl-demo)
   - [Spark](#spark)
     - [Spark Standalone mode](#spark-standalone-mode)
       - [Spark Jupyter notebook](#spark-jupyter-notebook)
   - [Kafka](#kafka)
     - [\[Development\] Kakfa Standalone mode with 1 Zookeeper, 1 Kafka and Kafka UI](#development-kakfa-standalone-mode-with-1-zookeeper-1-kafka-and-kafka-ui)
-
+  - [Tabular format](#tabular-format)
+    - [Apache Iceberg](#apache-iceberg)
+    - [Apache Hudi](#apache-hudi)
+    - [Delta Lake](#delta-lake)
 
 # Spark and Kafka in Docker template for testing and learning
-## Simple Lakehouse architecture and ETL demo
-
 ## Spark
 **Spark version:**
 Spark latest version for Hadoop with OpenJDK 8 and Scala 2.12
@@ -41,3 +44,11 @@ Go to [localhost:8080](localhost:8080) to view the Kafka UI
 
 *View the Comsumer*
 ![](assets/img/2024-08-24-09-59-00.png)
+
+## Tabular format
+
+### Apache Iceberg
+
+### Apache Hudi
+
+### Delta Lake

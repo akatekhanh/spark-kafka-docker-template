@@ -1,10 +1,13 @@
 version: '3'
 services:
   spark:
-    image: jupyter/pyspark-notebook
+    image: jupyter/pyspark-notebook:spark-3.5.0
+    # build: .
     container_name: spark-notebook
     ports:
-      - 8888:8888
+      - 8888:8888 # this port for Jypyter notebook
+      - 9999:9999 # this port for Marino
+      - 2718:2718
     environment:
       - INIT_DAEMON_STEP=setup_spark
       - PYTHONPATH=${PYTHONPATH}:/home/jovyan
@@ -14,11 +17,24 @@ services:
     - ../../assets/jars:/home/jovyan/jars
     - ../../data:/data
     - ../../requirements.txt:/home/jovyan/requirements.txt
+    - ../../geeksdata:/home/jovyan/geeksdata
     working_dir:
       /home/jovyan
-    networks:
-      - standalone_kafka_net
+    # networks:
+    #   - standalone_net
+    # This is the CMD to disable the token when you access the local jupyter lab. If you want to enable the
+    # jupyter token again, let delete this block
+    command: ["jupyter", "notebook", "--no-browser","--NotebookApp.token=''","--NotebookApp.password=''"]
+  
+    # command: [ "marimo", "edit"]
+    # healthcheck:
+    #   test: ["CMD", "echo", "ok"]
+    #   interval: 1m30s
+    #   timeout: 30s
+    #   retries: 5
+    #   start_period: 30s
+
 
 networks:
-  standalone_kafka_net:
+  standalone_net:
     external: true

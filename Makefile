@@ -19,11 +19,14 @@ down:
 
 ## Data Engineer - Tabular
 hudi:
+# For Spark versions: 3.3 - 3.5
+export SPARK_VERSION=3.5 # or 3.4, 3.3
 	spark-submit \
-	--packages org.apache.hudi:hudi-spark3.3-bundle_2.12:0.12.0 \
+	--packages org.apache.hudi:hudi-spark3.5-bundle_2.12:1.0.2 \
 	--conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer' \
 	--conf 'spark.sql.catalog.spark_catalog=org.apache.spark.sql.hudi.catalog.HoodieCatalog' \
 	--conf 'spark.sql.extensions=org.apache.spark.sql.hudi.HoodieSparkSessionExtension'\
+	--conf 'spark.kryo.registrator=org.apache.spark.HoodieSparkKryoRegistrar'\
 	geeksdata/data_engineer/table_format/hudi_hands_on.py 
 
 iceberg:

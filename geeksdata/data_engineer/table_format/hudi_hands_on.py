@@ -12,11 +12,6 @@ def build_conf(kwargs={}):
     return (
         SparkConf()
         .setAppName("Tabular hands on application")
-        # .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions')
-        # .set(f'spark.sql.catalog.{catalog_name}', 'org.apache.iceberg.spark.SparkCatalog')
-        # .set(f'spark.sql.catalog.{catalog_name}.type', 'hadoop')
-        # .set(f'spark.sql.catalog.{catalog_name}.warehouse', '/data')
-        # .set(f'spark.sql.catalog.{catalog_name}.io-impl', 'org.apache.iceberg.aws.s3.S3FileIO')
     )
 spark = get_spark_session(build_conf())
 

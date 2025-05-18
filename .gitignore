@@ -138,3 +138,6 @@ dmypy.json
 data
 .idea
 .DS_Store
+spark-warehouse/
+warehouse
+.python_history

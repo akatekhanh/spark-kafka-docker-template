@@ -6,7 +6,7 @@ FROM jupyter/pyspark-notebook:spark-3.5.0
 
 WORKDIR /home/jovyan
 
-RUN pip install marimo
+RUN pip install -r requirements.txt
 
 # Copy requirements file
 # COPY --link requirements.txt .

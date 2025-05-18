@@ -20,7 +20,7 @@ down:
 ## Data Engineer - Tabular
 hudi:
 # For Spark versions: 3.3 - 3.5
-export SPARK_VERSION=3.5 # or 3.4, 3.3
+	export SPARK_VERSION=3.5 # or 3.4, 3.3
 	spark-submit \
 	--packages org.apache.hudi:hudi-spark3.5-bundle_2.12:1.0.2 \
 	--conf 'spark.serializer=org.apache.spark.serializer.KryoSerializer' \
